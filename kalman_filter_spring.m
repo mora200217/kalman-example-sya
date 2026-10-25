@@ -84,7 +84,7 @@ step(Gs, Gs_incertidumbre); % CORRER
 % Digamos que tenemos 3 sensores. 
 % - 1 x Sensor de posición 
 % - 1 x Sensor de Velocidad 
-% - 1 x Sensor de Aceleracion. (% SIEMPRE TOCA MEDIR LA ENTRADA )
+% - 1 x Sensor de Fuerza. (% SIEMPRE TOCA MEDIR LA ENTRADA ) [En el video digo aceleracion pero realmente estamos midiendo fuerza]
 
 % Confianzas por caracteristicas de mis sensores 
 sigma_p1 = 0.01; % Desviacion de mi sensor de posicion 1 
