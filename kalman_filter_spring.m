@@ -43,7 +43,7 @@ step(Gs); % CORRER
 % modelo exacto de la respuesta real. Pero observemos como cambiaría la
 % respuesta
 
-Hs = tf([1.01],[0.9, 1]); % Dinámica de primer orden no modelada 
+Hs = tf([1.01],[0.09, 1]); % Dinámica de primer orden no modelada 
 
 Gs_no_modelada = tf(Gs) * Hs; 
 
@@ -91,7 +91,7 @@ sigma_p1 = 0.01; % Desviacion de mi sensor de posicion 1
 sigma_v1 = 0.02; % """"""""" velocidad 1
 
 % Matrices de confianza (Covarianzas) 
-Q = diag([6.9, 7.9]); 
+Q = diag([1000000, 10000000]); 
 R = diag([sigma_p1^2 , sigma_v1^2]); 
 
 % CORRER 
@@ -99,14 +99,14 @@ R = diag([sigma_p1^2 , sigma_v1^2]);
 %% END ====== Continuamos en Simulink 
 % Matrices discretas
 
-% x_k+1 =  x_k + v_k * delta_T  + 1/2m (a) * Ts^2
+% x_k+1 =  x_k + v_k * delta_T  + 1/2 (a) * Ts^2
 % v_k+1 =  v_k + a * delta_T
 
-% Pero recordemos que a = (F - kx - cv)
+% Pero recordemos que a = (F - kx - cv)/m
 
 % Sutitumos y encontramos las matrices 
 
-Fs = 1000; 
+Fs = 1000; % Hz
 Ts = 1/Fs; 
 
 F = [1 - k/(2*m)*Ts^2, Ts - c/(2*m)*Ts^2;
@@ -115,7 +115,7 @@ F = [1 - k/(2*m)*Ts^2, Ts - c/(2*m)*Ts^2;
 G = [1/(2*m)*Ts^2;
      Ts/m];
 
-H = eye(2);
+H = eye(2); % z = x 
 
 D_k = zeros(size(H, 1), 1);
 
